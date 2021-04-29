@@ -8,6 +8,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.6.1 // indirect
 	github.com/davecgh/go-spew v1.1.1
 	github.com/foolin/pagser v0.1.5
-	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/shopspring/decimal v1.2.0
 	github.com/thoas/go-funk v0.8.0 // indirect
+	google.golang.org/genproto v0.0.0-20210427215850-f767ed18ee4d // indirect
 )

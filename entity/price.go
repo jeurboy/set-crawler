@@ -1,9 +1,11 @@
 package entity
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/foolin/pagser"
+	"github.com/shopspring/decimal"
 )
 
 type PricePage struct {
@@ -31,8 +33,27 @@ type DecimalString string
 type IntString string
 type ChangeIntString string
 
-func (d DateString) ToDate() time.Time {
+func (das DateString) ToDate() time.Time {
 	return time.Now()
+}
+
+func (des DecimalString) ToDecimal() decimal.Decimal {
+	if ret, err := decimal.NewFromString(string(des)); err == nil {
+		return ret
+	}
+
+	ret, _ := decimal.NewFromString("0.00")
+
+	return ret
+}
+
+func (dei IntString) ToInt() int32 {
+	if retint, err := strconv.Atoi(string(dei)); err == nil {
+
+		return int32(retint)
+	}
+
+	return 0
 }
 
 func NewPagser() *pagser.Pagser {
