@@ -8,7 +8,7 @@ schema:
     commands:
       build:
         status: true
-        method: "go build -o ../build/bin main.go"
+        method: "go build -o ../build/bin examples/main.go"
       run:
         status: true
         method: ../build/bin

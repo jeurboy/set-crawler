@@ -1,9 +1,8 @@
-package main
+package crawler
 
 import (
 	"fmt"
 
-	"github.com/jeurboy/set-crawler/helpers/dump"
 	httphelpers "github.com/jeurboy/set-crawler/helpers/http"
 
 	"github.com/jeurboy/set-crawler/entity"
@@ -46,12 +45,4 @@ func GetAllStock() (entity.StockList, error) {
 
 	//print data
 	return data, nil
-}
-
-func main() {
-	fmt.Println("Start service")
-	data, _ := GetAllStock()
-
-	dump.DD(data)
-	fmt.Println("End")
 }
