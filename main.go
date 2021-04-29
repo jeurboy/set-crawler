@@ -1,10 +1,12 @@
 package main
 
 import (
-	"api/entity"
-	"api/helpers/dump"
-	httphelpers "api/helpers/http"
 	"fmt"
+
+	httphelpers "github.com/jeurboy/set-crawler/helpers/http"
+
+	"github.com/jeurboy/set-crawler/entity"
+	"github.com/jeurboy/set-crawler/helpers/dump"
 )
 
 var URLScheme = "https://www.set.or.th/set/historicaltrading.do?symbol=%s&ssoPageId=2&language=th&country=TH&page=%s"

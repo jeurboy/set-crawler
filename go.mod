@@ -1,4 +1,4 @@
-module api
+module github.com/jeurboy/set-crawler
 
 go 1.15
 
