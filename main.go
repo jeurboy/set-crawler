@@ -16,7 +16,7 @@ func main() {
 	//print data
 	dump.DD(data)
 
-	// GetAllStock(StocklistURL)
+	GetAllStock()
 
 	fmt.Println("End")
 }
@@ -42,8 +42,8 @@ func GetSetPriceData(stockName string, page int) (entity.PricePage, error) {
 	return data, nil
 }
 
-func GetAllStock(url string) (entity.StockList, error) {
-	rawPageHtml := string(httphelpers.GetDataFromURL(url))
+func GetAllStock() (entity.StockList, error) {
+	rawPageHtml := string(httphelpers.GetDataFromURL(StocklistURL))
 
 	//New default config
 	p := entity.NewStock()
