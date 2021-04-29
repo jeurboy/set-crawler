@@ -33,8 +33,14 @@ type DecimalString string
 type IntString string
 type ChangeIntString string
 
-func (das DateString) ToDate() time.Time {
-	return time.Now()
+func (das DateString) ToDate() (t time.Time) {
+	layout := "02/01/2006"
+	tp, err := time.Parse(layout, string(das))
+
+	if err != nil {
+		return
+	}
+	return tp
 }
 
 func (des DecimalString) ToDecimal() decimal.Decimal {
