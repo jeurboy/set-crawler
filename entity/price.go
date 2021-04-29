@@ -4,12 +4,11 @@ import (
 	"time"
 
 	"github.com/foolin/pagser"
-	"github.com/foolin/pagser/extensions/markdown"
 )
 
-type PageDataRaw struct {
+type PricePage struct {
 	Title      string `pagser:"title"`
-	PriceTable []struct {
+	PriceTable struct {
 		Title     DateHeaderRaw  `pagser:"thead tr th"`
 		DatePrice []DatePriceRaw `pagser:"tbody tr"`
 	} `pagser:"table"`
@@ -38,7 +37,6 @@ func (d DateString) ToDate() time.Time {
 
 func NewPagser() *pagser.Pagser {
 	p := pagser.New()
-	markdown.Register(p)
 
 	return p
 }

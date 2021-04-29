@@ -1,8 +1,10 @@
 module api
 
-go 1.14
+go 1.15
 
 require (
+	github.com/360EntSecGroup-Skylar/excelize v1.4.1
+	github.com/360EntSecGroup-Skylar/excelize/v2 v2.4.0
 	github.com/PuerkitoBio/goquery v1.6.1
 	github.com/davecgh/go-spew v1.1.1
 	github.com/foolin/pagser v0.1.5

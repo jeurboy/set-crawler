@@ -3,12 +3,12 @@ package main
 import (
 	"api/entity"
 	"api/helpers/dump"
+	httphelpers "api/helpers/http"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 )
 
 var URLScheme = "https://www.set.or.th/set/historicaltrading.do?symbol=%s&ssoPageId=2&language=th&country=TH&page=%s"
+var StocklistURL = "https://www.set.or.th/dat/eod/listedcompany/static/listedCompanies_th_TH.xls"
 
 func main() {
 	data, _ := GetSetPriceData("AAV", 0)
@@ -16,17 +16,19 @@ func main() {
 	//print data
 	dump.DD(data)
 
+	// GetAllStock(StocklistURL)
+
 	fmt.Println("End")
 }
 
-func GetSetPriceData(stockName string, page int) (entity.PageDataRaw, error) {
+func GetSetPriceData(stockName string, page int) (entity.PricePage, error) {
 	url := fmt.Sprintf(URLScheme, stockName, page)
-	rawPageHtml := string(getDataFromURL(url))
+	rawPageHtml := string(httphelpers.GetDataFromURL(url))
 
 	//New default config
 	p := entity.NewPagser()
 
-	var data entity.PageDataRaw
+	var data entity.PricePage
 
 	//parse html data
 	err := p.Parse(&data, rawPageHtml)
@@ -40,14 +42,17 @@ func GetSetPriceData(stockName string, page int) (entity.PageDataRaw, error) {
 	return data, nil
 }
 
-func getDataFromURL(urlStocks string) (body []byte) {
-	resp, err := http.Get(urlStocks)
-	if err != nil {
-		// handle error
-		return
-	}
-	defer resp.Body.Close()
-	body, _ = ioutil.ReadAll(resp.Body)
+func GetAllStock(url string) (entity.StockList, error) {
+	rawPageHtml := string(httphelpers.GetDataFromURL(url))
 
-	return
+	//New default config
+	p := entity.NewStock()
+
+	var data entity.StockList
+
+	//parse html data
+	_ = p.Parse(&data, rawPageHtml)
+
+	//print data
+	return data, nil
 }
