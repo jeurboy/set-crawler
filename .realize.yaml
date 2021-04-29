@@ -1,0 +1,32 @@
+settings:
+  legacy:
+    force: false
+    interval: 100s
+schema:
+  - name: src
+    path: .
+    commands:
+      build:
+        status: true
+        method: "go build -o ../build/bin main.go"
+      run:
+        status: true
+        method: ../build/bin
+        args:
+          - api
+    watcher:
+      extensions:
+        - go
+      paths:
+        - /
+      ignored_paths:
+        - .git
+        - .realize
+        - vendor
+        - .docker
+        - .jenkins
+        - .kube-deploy
+        - .scripts
+        - .vscode
+        - .devenv
+        - node_modules
