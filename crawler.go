@@ -2,6 +2,7 @@ package crawler
 
 import (
 	"fmt"
+	"strconv"
 
 	httphelpers "github.com/jeurboy/set-crawler/helpers/http"
 
@@ -12,7 +13,9 @@ var URLScheme = "https://www.set.or.th/set/historicaltrading.do?symbol=%s&ssoPag
 var StocklistURL = "https://www.set.or.th/dat/eod/listedcompany/static/listedCompanies_th_TH.xls"
 
 func GetSetPriceData(stockName string, page int) (entity.PricePage, error) {
-	url := fmt.Sprintf(URLScheme, stockName, page)
+	url := fmt.Sprintf(URLScheme, stockName, strconv.Itoa(page))
+
+	fmt.Printf("Get data from : %s \n", url)
 	rawPageHtml := string(httphelpers.GetDataFromURL(url))
 
 	//New default config
