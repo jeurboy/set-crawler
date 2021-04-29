@@ -2,6 +2,7 @@ package entity
 
 import (
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/foolin/pagser"
@@ -22,9 +23,10 @@ type DatePriceRaw struct {
 	Open       DecimalString   `pagser:"td->eq(1)"`
 	High       DecimalString   `pagser:"td->eq(2)"`
 	Low        DecimalString   `pagser:"td->eq(3)"`
-	Change     ChangeIntString `pagser:"td->eq(4)"`
-	Volume     IntString       `pagser:"td->eq(5)"`
-	TotalTrade DecimalString   `pagser:"td->eq(6)"`
+	Close      DecimalString   `pagser:"td->eq(4)"`
+	Change     ChangeIntString `pagser:"td->eq(6)"`
+	Volume     IntString       `pagser:"td->eq(7)"`
+	TotalTrade DecimalString   `pagser:"td->eq(8)"`
 }
 
 type DateHeaderRaw []string
@@ -54,8 +56,9 @@ func (des DecimalString) ToDecimal() decimal.Decimal {
 }
 
 func (dei IntString) ToInt() int32 {
-	if retint, err := strconv.Atoi(string(dei)); err == nil {
+	str := strings.Replace(string(dei), ",", "", -1)
 
+	if retint, err := strconv.Atoi(str); err == nil {
 		return int32(retint)
 	}
 
