@@ -46,7 +46,8 @@ func (das DateString) ToDate() (t time.Time) {
 }
 
 func (des DecimalString) ToDecimal() decimal.Decimal {
-	if ret, err := decimal.NewFromString(string(des)); err == nil {
+	str := strings.Replace(string(des), ",", "", -1)
+	if ret, err := decimal.NewFromString(string(str)); err == nil {
 		return ret
 	}
 
