@@ -1,9 +1,13 @@
-module api
+module github.com/jeurboy/set-crawler
 
 go 1.15
 
 require (
+	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
+	github.com/360EntSecGroup-Skylar/excelize/v2 v2.4.0 // indirect
+	github.com/PuerkitoBio/goquery v1.6.1 // indirect
 	github.com/davecgh/go-spew v1.1.1
 	github.com/foolin/pagser v0.1.5
-	github.com/jeurboy/set-crawler v0.0.0-20210429090648-739488e1fc3a
+	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/thoas/go-funk v0.8.0 // indirect
 )

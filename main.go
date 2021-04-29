@@ -3,25 +3,14 @@ package main
 import (
 	"fmt"
 
+	"github.com/jeurboy/set-crawler/helpers/dump"
 	httphelpers "github.com/jeurboy/set-crawler/helpers/http"
 
 	"github.com/jeurboy/set-crawler/entity"
-	"github.com/jeurboy/set-crawler/helpers/dump"
 )
 
 var URLScheme = "https://www.set.or.th/set/historicaltrading.do?symbol=%s&ssoPageId=2&language=th&country=TH&page=%s"
 var StocklistURL = "https://www.set.or.th/dat/eod/listedcompany/static/listedCompanies_th_TH.xls"
-
-func main() {
-	data, _ := GetSetPriceData("AAV", 0)
-
-	//print data
-	dump.DD(data)
-
-	GetAllStock()
-
-	fmt.Println("End")
-}
 
 func GetSetPriceData(stockName string, page int) (entity.PricePage, error) {
 	url := fmt.Sprintf(URLScheme, stockName, page)
@@ -57,4 +46,12 @@ func GetAllStock() (entity.StockList, error) {
 
 	//print data
 	return data, nil
+}
+
+func main() {
+	fmt.Println("Start service")
+	data, _ := GetAllStock()
+
+	dump.DD(data)
+	fmt.Println("End")
 }
