@@ -19,14 +19,14 @@ type PricePage struct {
 
 //" วันที่\n    ราคาเปิด\n    ราคาสูงสุด\n    ราคาต่ำสุด\n    ราคาปิด\n    เปลี่ยนแปลง\n    %เปลี่ยนแปลง\n    ปริมาณรวม(หุ้น)\n    มูลค่ารวม('000 บาท)",
 type DatePriceRaw struct {
-	Date       DateString      `pagser:"td->eq(0)"`
-	Open       DecimalString   `pagser:"td->eq(1)"`
-	High       DecimalString   `pagser:"td->eq(2)"`
-	Low        DecimalString   `pagser:"td->eq(3)"`
-	Close      DecimalString   `pagser:"td->eq(4)"`
-	Change     ChangeIntString `pagser:"td->eq(6)"`
-	Volume     IntString       `pagser:"td->eq(7)"`
-	TotalTrade DecimalString   `pagser:"td->eq(8)"`
+	Date       DateString    `pagser:"td->eq(0)"`
+	Open       DecimalString `pagser:"td->eq(1)"`
+	High       DecimalString `pagser:"td->eq(2)"`
+	Low        DecimalString `pagser:"td->eq(3)"`
+	Close      DecimalString `pagser:"td->eq(4)"`
+	Change     DecimalString `pagser:"td->eq(6)"`
+	Volume     IntString     `pagser:"td->eq(7)"`
+	TotalTrade DecimalString `pagser:"td->eq(8)"`
 }
 
 type DateHeaderRaw []string
