@@ -15,7 +15,7 @@ var StocklistURL = "https://www.set.or.th/dat/eod/listedcompany/static/listedCom
 func GetSetPriceData(stockName string, page int) (entity.PricePage, error) {
 	url := fmt.Sprintf(URLScheme, stockName, strconv.Itoa(page))
 
-	fmt.Printf("Get data from : %s \n", url)
+	// fmt.Printf("Get data from : %s \n", url)
 	rawPageHtml := string(httphelpers.GetDataFromURL(url))
 
 	//New default config
