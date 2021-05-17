@@ -78,6 +78,11 @@ func GetCompanyFinancial(stockName string) ([]entity.FinancialRaw, error) {
 			i++
 			return
 		}
+
+		if len(data.FinancialTable.FinancialData) < 9 {
+			return
+		}
+
 		lineData := data.FinancialTable.FinancialData
 		// if i != 0 {
 		// 	funk.ForEach(lineData, func(d entity.FinancialData) {
