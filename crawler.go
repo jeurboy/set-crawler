@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"regexp"
 	"strconv"
+	"time"
 
 	httphelpers "github.com/jeurboy/set-crawler/helpers/http"
 	"github.com/thoas/go-funk"
@@ -89,7 +90,11 @@ func GetCompanyFinancial(stockName string) ([]entity.FinancialRaw, error) {
 		re := regexp.MustCompile(`\d{2}/\d{2}/\d{2}`)
 		date := string(re.Find([]byte(t)))
 
-		r.Date = entity.DateString(date)
+		layout := "02/01/06"
+		tp, _ := time.Parse(layout, string(date))
+		tp = tp.AddDate(543, 0, 0)
+
+		r.Date = entity.DateString(tp.Format("02/01/2006"))
 		r.Asset = entity.DecimalString(lineData[0].Column[i])
 		r.Liabilities = entity.DecimalString(lineData[1].Column[i])
 		r.Equity = entity.DecimalString(lineData[3].Column[i])
