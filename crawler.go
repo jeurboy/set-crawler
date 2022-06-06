@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
-	"strconv"
 	"time"
 
 	httphelpers "github.com/jeurboy/set-crawler/helpers/http"
@@ -14,29 +13,31 @@ import (
 )
 
 var URLScheme = "https://www.settrade.com/C04_02_stock_historical_p1.jsp?txtSymbol=%s&ssoPageId=12&selectPage=%s"
+var URLSchemeAPI = "https://www.set.or.th/api/set/stock/%s/historical-trading"
 var StocklistURL = "https://www.set.or.th/dat/eod/listedcompany/static/listedCompanies_th_TH.xls"
 var URLCompanyFinancial = "https://www.settrade.com/C04_03_stock_companyhighlight_p1.jsp?txtSymbol=%s&ssoPageId=12&selectPage=3"
 
 func GetSetPriceData(stockName string, page int) (entity.PricePage, error) {
-	url := fmt.Sprintf(URLScheme, stockName, strconv.Itoa(page))
-
-	// fmt.Printf("Get data from : %s \n", url)
-	rawPageHtml := string(httphelpers.GetDataFromURL(url))
-
-	//New default config
-	p := entity.NewPagser()
-
 	var data entity.PricePage
 
-	//parse html data
-	err := p.Parse(&data, rawPageHtml)
+	url := fmt.Sprintf(URLSchemeAPI, stockName)
+	var test []map[string]interface{}
+	httphelpers.GetJsonFromURL(url, &test)
 
-	//check error
-	if err != nil {
-		return data, err
-	}
+	data.Title = stockName
+	data.PriceTable.DatePrice = funk.Map(test, func(pp map[string]interface{}) entity.DatePriceRaw {
+		return entity.DatePriceRaw{
+			Date:       entity.DateString(pp["date"].(string)),
+			Open:       entity.DecimalString(fmt.Sprintf("%.2f", pp["open"])),
+			High:       entity.DecimalString(fmt.Sprintf("%.2f", pp["high"])),
+			Low:        entity.DecimalString(fmt.Sprintf("%.2f", pp["low"])),
+			Close:      entity.DecimalString(fmt.Sprintf("%.2f", pp["close"])),
+			Change:     entity.DecimalString(fmt.Sprintf("%.2f", pp["change"])),
+			Volume:     entity.IntString(fmt.Sprintf("%.0f", pp["totalVolume"])),
+			TotalTrade: entity.DecimalString(fmt.Sprintf("%.2f", pp["totalValue"])),
+		}
+	}).([]entity.DatePriceRaw)
 
-	//print data
 	return data, nil
 }
 

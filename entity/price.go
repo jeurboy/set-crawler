@@ -12,21 +12,21 @@ import (
 type PricePage struct {
 	Title      string `pagser:"title"`
 	PriceTable struct {
-		Title     DateHeaderRaw  `pagser:"thead tr th"`
+		// Title     DateHeaderRaw  `pagser:"thead tr th"`
 		DatePrice []DatePriceRaw `pagser:"tbody tr"`
 	} `pagser:"table"`
 }
 
 //" วันที่\n    ราคาเปิด\n    ราคาสูงสุด\n    ราคาต่ำสุด\n    ราคาปิด\n    เปลี่ยนแปลง\n    %เปลี่ยนแปลง\n    ปริมาณรวม(หุ้น)\n    มูลค่ารวม('000 บาท)",
 type DatePriceRaw struct {
-	Date       DateString    `pagser:"td->eq(0)"`
-	Open       DecimalString `pagser:"td->eq(1)"`
-	High       DecimalString `pagser:"td->eq(2)"`
-	Low        DecimalString `pagser:"td->eq(3)"`
-	Close      DecimalString `pagser:"td->eq(4)"`
-	Change     DecimalString `pagser:"td->eq(6)"`
-	Volume     IntString     `pagser:"td->eq(7)"`
-	TotalTrade DecimalString `pagser:"td->eq(8)"`
+	Date       DateString    `pagser:"td->eq(0)" json:"date"`
+	Open       DecimalString `pagser:"td->eq(1)" json:"open"`
+	High       DecimalString `pagser:"td->eq(2)" json:"high"`
+	Low        DecimalString `pagser:"td->eq(3)" json:"low"`
+	Close      DecimalString `pagser:"td->eq(5)" json:"close"`
+	Change     DecimalString `pagser:"td->eq(6)" json:"change"`
+	Volume     IntString     `pagser:"td->eq(8)" json:"totalVolume"`
+	TotalTrade DecimalString `pagser:"td->eq(9)" json:"totalValue"`
 }
 
 type DateHeaderRaw []string
