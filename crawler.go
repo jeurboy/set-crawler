@@ -24,10 +24,14 @@ func GetSetPriceData(stockName string, page int) (entity.PricePage, error) {
 	var test []map[string]interface{}
 	httphelpers.GetJsonFromURL(url, &test)
 
+	// os.Exit(0)
 	data.Title = stockName
 	data.PriceTable.DatePrice = funk.Map(test, func(pp map[string]interface{}) entity.DatePriceRaw {
+		date, _ := time.Parse(entity.DateFormat, pp["date"].(string))
+		date = date.AddDate(543, 0, 0)
+
 		return entity.DatePriceRaw{
-			Date:       entity.DateString(pp["date"].(string)),
+			Date:       entity.DateString(date.Format(entity.DateFormat)),
 			Open:       entity.DecimalString(fmt.Sprintf("%.2f", pp["open"])),
 			High:       entity.DecimalString(fmt.Sprintf("%.2f", pp["high"])),
 			Low:        entity.DecimalString(fmt.Sprintf("%.2f", pp["low"])),
