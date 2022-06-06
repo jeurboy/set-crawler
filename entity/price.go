@@ -36,7 +36,7 @@ type IntString string
 type ChangeIntString string
 
 func (das DateString) ToDate() (t time.Time) {
-	layout := "02/01/06"
+	layout := "2006-01-02T15:04:05+07:00" // 2021-12-03T00:00:00+07:00
 	tp, err := time.Parse(layout, string(das))
 
 	if err != nil {
