@@ -13,7 +13,7 @@ import (
 	"github.com/jeurboy/set-crawler/entity"
 )
 
-var URLScheme = "https://www.set.or.th/set/historicaltrading.do?symbol=%s&ssoPageId=2&language=th&country=TH&page=%s"
+var URLScheme = "https://www.settrade.com/C04_02_stock_historical_p1.jsp?txtSymbol=%s&ssoPageId=12&selectPage=%s"
 var StocklistURL = "https://www.set.or.th/dat/eod/listedcompany/static/listedCompanies_th_TH.xls"
 var URLCompanyFinancial = "https://www.settrade.com/C04_03_stock_companyhighlight_p1.jsp?txtSymbol=%s&ssoPageId=12&selectPage=3"
 
